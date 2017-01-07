@@ -1,0 +1,68 @@
+body {
+    background-color: #BA004C;
+}
+h1 {
+    font-family: Courier;
+    color: #FFF7D8;
+}
+
+p {
+    color: #FFF7D8;
+}
+
+img { 
+	position: absolute;
+  	top: 0px;
+  	left: 0px;
+}
+
+#sandShape { 
+	-webkit-mask-image: url(images/hourglass_filled.svg);
+	-webkit-mask-size: 100% 100%;
+}
+
+#spaceUpper { 
+	top: 83px;
+}
+
+#spaceLower { 
+	top: 262px;
+}
+
+.container {
+	width:500px;
+	height:500px;
+    position: relative;
+    margin: auto;
+    text-align:center;
+}
+
+.button_container {
+	width:500px;
+	height:100px;
+    position: relative;
+    margin: auto;
+    text-align:center;
+}
+
+.button {
+    background-color: #FFF7D8;
+    border-radius: 12px;
+    border: none;
+   	font-family: Courier;
+    color: #BA004C;
+    padding: 15px 32px;
+   	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    font-style: bold;
+}
+
+.button:active {
+  transform: translateY(4px);
+}
+
+.button:focus {
+  outline: none;
+}

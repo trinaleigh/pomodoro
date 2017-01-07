@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+
+ <g>
+  <title>Layer 1</title>
+  <polygon strokeWidth="5" strokecolor="#000000" fill="#FF0000" edge="0" orient="x" sides="5" shape="regularPoly" id="svg_3" cy="48" cx="155"/>
+  <path stroke="#FFF7D8" id="svg_27" d="m149.891011,44.999799c-203.68731,0.06667 204.1671,209.66669 0.12318,210.00002c-204.04392,0.33333 203.56413,-210.06669 -0.12318,-210.00002z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="10" fill="#FFF7D8"/>
+ </g>
+</svg>
