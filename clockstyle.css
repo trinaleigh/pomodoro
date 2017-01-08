@@ -15,8 +15,8 @@ p {
 
 img { 
 	position: absolute;
-  top: 0px;
   left: 0px;
+  top: 0px;
 }
 
 #sandShape { 
@@ -32,7 +32,7 @@ img {
 	top: 254px;
 }
 
-.container {
+.hourglass_container {
 	width:500px;
 	height:500px;
   position: relative;
@@ -68,4 +68,12 @@ img {
 
 .button:focus {
   outline: none;
+}
+
+.notepad_container {
+  height: 500px;
+  width: 200px;
+  position: absolute;
+  left: 100px;
+  top: 150px;
 }

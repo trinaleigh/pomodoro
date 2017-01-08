@@ -8,6 +8,8 @@ var hourglassBottom = document.getElementById("spaceLower");
 
 const maxTime = 25*60
 
+var counter = 0
+
 var secondsLeft = resetClock();
 
 function resetClock(){
@@ -29,6 +31,7 @@ function clockDisplay(secondsLeft){
 }
 
 function startTimer(){
+	counter += 1
 
 	gong.play();
 	startButton.disabled = true;
@@ -44,9 +47,9 @@ function startTimer(){
 		// animate the hourglass every 10 s
 		if(secondsLeft % 10 == 0){
 			topHeight = parseInt(hourglassTop.height);
-			hourglassTop.height = 150*(1-(secondsLeft/maxTime));
+			hourglassTop.height = Math.round(150*(1-(secondsLeft/maxTime)));
 			bottomHeight = parseInt(hourglassBottom.height);
-			hourglassBottom.height = 150*(secondsLeft/maxTime);
+			hourglassBottom.height = Math.round(150*(secondsLeft/maxTime));
 		}
 
 		// reset at 0
@@ -54,6 +57,14 @@ function startTimer(){
 			clearInterval(timerVar);
 			gong.play();
 			resetClock();
+			checkMark();
 		}
 	}	
+}
+
+function checkMark(){
+	if(counter <= 4){
+		var notebookDisplay = document.getElementById("round " + counter)
+		notebookDisplay.innerHTML += " ✓";
+	}
 }
