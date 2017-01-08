@@ -40,9 +40,9 @@ img {
 .button_container {
 	width:500px;
 	height:100px;
-    position: relative;
-    margin: auto;
-    text-align:center;
+  position: relative;
+  margin: auto;
+  text-align:center;
 }
 
 .button {
@@ -56,7 +56,7 @@ img {
     text-decoration: none;
     display: inline-block;
     font-size: 24px;
-    font-style: bold;
+    font-weight: bold;
 }
 
 .button:active {
