@@ -1,8 +1,8 @@
 body {
     background-color: #BA004C;
+    font-family: Courier;
 }
 h1 {
-    font-family: Courier;
     color: #FFF7D8;
 }
 
@@ -12,8 +12,8 @@ p {
 
 img { 
 	position: absolute;
-  	top: 0px;
-  	left: 0px;
+  top: 0px;
+  left: 0px;
 }
 
 #sandShape { 
@@ -32,9 +32,9 @@ img {
 .container {
 	width:500px;
 	height:500px;
-    position: relative;
-    margin: auto;
-    text-align:center;
+  position: relative;
+  margin: auto;
+  text-align:center;
 }
 
 .button_container {
@@ -46,17 +46,17 @@ img {
 }
 
 .button {
-    background-color: #FFF7D8;
-    border-radius: 12px;
-    border: none;
-   	font-family: Courier;
-    color: #BA004C;
-    padding: 15px 32px;
-   	text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 24px;
-    font-weight: bold;
+  background-color: #FFF7D8;
+  border-radius: 12px;
+  border: none;
+ 	font-family: Courier;
+  color: #BA004C;
+  padding: 15px 32px;
+ 	text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .button:active {
