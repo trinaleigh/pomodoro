@@ -6,10 +6,12 @@ var timerDisplay = document.getElementById("countdown");
 var hourglassTop = document.getElementById("spaceUpper");
 var hourglassBottom = document.getElementById("spaceLower");
 
+const maxTime = 25*60
+
 var secondsLeft = resetClock();
 
 function resetClock(){
-	secondsLeft = 25*60;
+	secondsLeft = maxTime;
 	timerDisplay.innerHTML = clockDisplay(secondsLeft);
 	startButton.disabled = false;
 	startButton.style.backgroundColor = "#FFF7D8";
@@ -19,7 +21,10 @@ function resetClock(){
 }
 
 function clockDisplay(secondsLeft){
-	prettyTime = (Math.floor(secondsLeft/60) + ' : ' + (secondsLeft % 60).toLocaleString(undefined, {minimumIntegerDigits: 2}))
+	// format timer to mm : ss
+	prettyTime = (Math.floor(secondsLeft/60).toLocaleString(undefined, {minimumIntegerDigits: 2}) 
+		+ ' : ' 
+		+ (secondsLeft % 60).toLocaleString(undefined, {minimumIntegerDigits: 2}))
 	return prettyTime
 }
 
@@ -29,7 +34,7 @@ function startTimer(){
 	startButton.disabled = true;
 	startButton.style.backgroundColor = "#BA004C";
 
-	var timerVar = setInterval(countDown,10);
+	var timerVar = setInterval(countDown,1000); // set to 1000 for use, 10 for testing
 
 	function countDown(){
 		// decrement timer
@@ -39,11 +44,10 @@ function startTimer(){
 		// animate the hourglass every 10 s
 		if(secondsLeft % 10 == 0){
 			topHeight = parseInt(hourglassTop.height);
-			hourglassTop.height = topHeight + 1;
+			hourglassTop.height = 150*(1-(secondsLeft/maxTime));
 			bottomHeight = parseInt(hourglassBottom.height);
-			hourglassBottom.height = bottomHeight - 1;
+			hourglassBottom.height = 150*(secondsLeft/maxTime);
 		}
-
 
 		// reset at 0
 		if(secondsLeft == 0) {

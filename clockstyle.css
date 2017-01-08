@@ -2,12 +2,15 @@ body {
     background-color: #BA004C;
     font-family: Courier;
 }
+
 h1 {
     color: #FFF7D8;
 }
 
 p {
     color: #FFF7D8;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 img { 
