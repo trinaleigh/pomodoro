@@ -6,6 +6,8 @@ var timerDisplay = document.getElementById("countdown");
 var hourglassTop = document.getElementById("spaceUpper");
 var hourglassBottom = document.getElementById("spaceLower");
 
+var hourglassWhole = document.getElementById("hourglass_total");
+
 const maxTime = 25*60
 
 var counter = 0
@@ -13,13 +15,25 @@ var counter = 0
 var secondsLeft = resetClock();
 
 function resetClock(){
-	secondsLeft = maxTime;
-	timerDisplay.innerHTML = clockDisplay(secondsLeft);
-	startButton.disabled = false;
-	startButton.style.backgroundColor = "#FFF7D8";
-	hourglassTop.height = 0
-	hourglassBottom.height = 150
-	return secondsLeft
+	// reset the timer and start button
+		secondsLeft = maxTime;
+		timerDisplay.innerHTML = clockDisplay(secondsLeft);
+		startButton.disabled = false;
+		startButton.style.backgroundColor = "#FFF7D8";
+		
+		// reset the hourglass display back to its original configuration
+		// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
+		hourglassTop.height = 0;
+		hourglassBottom.height = 150;
+		// hide the rotation
+		hourglassWhole.style.transition = `none`;
+		hourglassWhole.style.transform = `rotate(180deg)`;
+		// add Timeout before resetting transition - prevents net zero change getting swallowed in cache
+		setTimeout(function(){
+			hourglassWhole.style.transition = `transform 5s`;
+		},1);
+
+	return secondsLeft;
 }
 
 function clockDisplay(secondsLeft){
@@ -30,14 +44,20 @@ function clockDisplay(secondsLeft){
 	return prettyTime
 }
 
-function startTimer(){
+function newRound(){
 	counter += 1
 
 	gong.play();
+	hourglassWhole.style.transform = `rotate(0deg)`
 	startButton.disabled = true;
-	startButton.style.backgroundColor = "#BA004C";
+	startButton.style.backgroundColor = "#BA004C"
 
-	var timerVar = setInterval(countDown,1000); // set to 1000 for use, 10 for testing
+	setTimeout(startTimer, 2000);
+
+}
+
+function startTimer(){
+	var timerVar = setInterval(countDown,5); // set to 1000 for use, 10 for testing
 
 	function countDown(){
 		// decrement timer

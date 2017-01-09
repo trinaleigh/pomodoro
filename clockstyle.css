@@ -33,11 +33,13 @@ img {
 }
 
 .hourglass_container {
-	width:500px;
-	height:500px;
+	width:484px;
+	height:484px;
   position: relative;
   margin: auto;
-  text-align:center;
+  text-align: center;
+  transform: rotate(180deg);
+  transition: transform 3s;
 }
 
 .button_container {
