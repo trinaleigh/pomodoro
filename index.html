@@ -21,7 +21,7 @@
 
 		<div class="button_container">
 			<p id="countdown"></p>
-			<button class="button" onclick="newRound()" type="button" id="button">start</button>
+			<button class="button" onclick="newRound()" type="button" id="start_button">start</button>
 		</div>
 
 		<div class="notepad_container">
@@ -31,6 +31,10 @@
 			<p id = "round 4">round 4</p>
 		</div>
 
+		<div class="break_container">
+			<p id = "breakType"></p>
+			<button class="button" onclick="resetSession()" type="button" id="reset_button" disabled = true>start over</button>
+		</div>
 
 
 		<script type="text/javascript" src="clock.js"></script>

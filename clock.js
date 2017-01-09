@@ -1,6 +1,9 @@
 var gong = new Audio('audio/gong.mp3');
 
-var startButton = document.getElementById("button")
+var startButton = document.getElementById("start_button")
+var resetButton = document.getElementById("reset_button")
+resetButton.style.backgroundColor = `#BA004C`
+
 var timerDisplay = document.getElementById("countdown");
 
 var hourglassTop = document.getElementById("spaceUpper");
@@ -8,7 +11,10 @@ var hourglassBottom = document.getElementById("spaceLower");
 
 var hourglassWhole = document.getElementById("hourglass_total");
 
-const maxTime = 25*60
+var breakDisplay = document.getElementById("breakType");
+
+
+const maxTime = 25*60 // set the session duration
 
 var counter = 0
 
@@ -20,9 +26,9 @@ function resetClock(){
 		timerDisplay.innerHTML = clockDisplay(secondsLeft);
 		startButton.disabled = false;
 		startButton.style.backgroundColor = "#FFF7D8";
-		
-		// reset the hourglass display back to its original configuration
-		// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
+
+	// reset the hourglass display back to its original configuration
+	// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
 		hourglassTop.height = 0;
 		hourglassBottom.height = 150;
 		// hide the rotation
@@ -46,22 +52,27 @@ function clockDisplay(secondsLeft){
 
 function newRound(){
 	counter += 1
-
+	breakDisplay.innerHTML = ""
 	gong.play();
 	hourglassWhole.style.transform = `rotate(0deg)`
 	startButton.disabled = true;
 	startButton.style.backgroundColor = "#BA004C"
 
-	setTimeout(startTimer, 2000);
+	setTimeout(startTimer, 3000);
 
 }
 
 function startTimer(){
-	var timerVar = setInterval(countDown,5); // set to 1000 for use, 10 for testing
+	var timerVar = setInterval(countDown,1000); // run every second
+	var startTime = new Date().getTime()
 
 	function countDown(){
 		// decrement timer
-		secondsLeft -= 1;
+		// check against current time (rather than decrementing by 1 each interval) 
+		// this prevents issues with setInterval going idle in inactive browser tab
+		currentTime = new Date().getTime()
+		secondsLeft = Math.round(maxTime - [(currentTime - startTime)/1000])
+		// secondsLeft -= 1;
 		timerDisplay.innerHTML = clockDisplay(secondsLeft);
 
 		// animate the hourglass every 10 s
@@ -73,18 +84,42 @@ function startTimer(){
 		}
 
 		// reset at 0
-		if(secondsLeft == 0) {
+		if(secondsLeft <= 0) {
 			clearInterval(timerVar);
 			gong.play();
-			resetClock();
 			checkMark();
+			displayBreak();
+			if(counter != 4){
+				resetClock();
+			}
+			else {
+				resetButton.disabled = false;
+				resetButton.style.backgroundColor = "#FFF7D8";
+			}
 		}
 	}	
 }
 
 function checkMark(){
 	if(counter <= 4){
-		var notebookDisplay = document.getElementById("round " + counter)
+		var notebookDisplay = document.getElementById("round " + counter);
 		notebookDisplay.innerHTML += " ✓";
 	}
+}
+
+function displayBreak(){
+	if(counter != 4){
+		breakDisplay.innerHTML = "take a short break!";
+	}
+	else {
+		breakDisplay.innerHTML = "take a long break!";
+	}
+}
+
+function resetSession(){
+	counter = 0;
+	secondsLeft = resetClock();
+	breakDisplay.innerHTML = ""
+	resetButton.disabled = false;
+	resetButton.style.backgroundColor = "#BA004C";
 }

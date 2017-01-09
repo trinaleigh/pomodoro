@@ -78,4 +78,15 @@ img {
   position: absolute;
   left: 100px;
   top: 150px;
+  text-align: middle;
 }
+
+.break_container {
+  height: 500px;
+  width: 200px;
+  position: absolute;
+  right: 100px;
+  top: 150px;
+  text-align: middle;
+}
+
