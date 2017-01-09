@@ -14,7 +14,7 @@ var hourglassWhole = document.getElementById("hourglass_total");
 var breakDisplay = document.getElementById("breakType");
 
 
-const maxTime = 25*60 // set the session duration
+const maxTime = 25*60 // set the session duration in seconds
 
 var counter = 0
 

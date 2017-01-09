@@ -78,7 +78,9 @@ img {
   position: absolute;
   left: 100px;
   top: 150px;
-  text-align: middle;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .break_container {
@@ -87,6 +89,12 @@ img {
   position: absolute;
   right: 100px;
   top: 150px;
-  text-align: middle;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
+/*.tracker {
+   vertical-align: middle;
+}
+*/
