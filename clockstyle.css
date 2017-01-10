@@ -20,6 +20,24 @@ img {
   top: 0px;
 }
 
+form {
+    color: #FFF7D8;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    left: 20px;
+}
+
+input[type=number] {
+    background-color: #FFF7D8;
+    color: #BA004C;
+    font-family: Courier;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+}
+
+
 #sandShape { 
 	-webkit-mask-image: url(images/hourglass_filled.svg);
 	-webkit-mask-size: 100% 100%;

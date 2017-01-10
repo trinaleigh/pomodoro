@@ -12,6 +12,8 @@
 
 	    <h1 id = "quote_goes_here"></h1>
 
+
+
 	    <div class="hourglass_container" id ="hourglass_total">
 		   	<img id = "sandShape" src="images/sand.svg" height="484" width="484" alt="sand">
 		   	<!--spaces will scale from 0 to 155: -->
@@ -37,6 +39,10 @@
 			<button class="button" onclick="resetSession()" type="button" id="reset_button" disabled = true>start over</button>
 		</div>
 
+	 	<form class="input_change">
+	  		pomodoro duration <br>(5-60 mins): 
+	  		<input type="number" name="duration" min="5" max="60" step="5" value= "25">
+		</form>
 
 		<script type="text/javascript" src="clock.js"></script>
 

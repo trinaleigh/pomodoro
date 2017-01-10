@@ -1,34 +1,49 @@
+// get audio file to play at start / end of each round
 var gong = new Audio('audio/gong.mp3');
 
-var header = document.getElementById("quote_goes_here");
+// get page elements:
 
-var startButton = document.getElementById("start_button")
-var resetButton = document.getElementById("reset_button")
-resetButton.style.backgroundColor = `#BA004C`
+	// header for placing random quotes
+	var header = document.getElementById("quote_goes_here");
 
-var timerDisplay = document.getElementById("countdown");
+	// start and reset buttons
+	// make the reset button invisible to start
+	var startButton = document.getElementById("start_button")
+	var resetButton = document.getElementById("reset_button")
+	resetButton.style.backgroundColor = `#BA004C`
 
-var hourglassTop = document.getElementById("spaceUpper");
-var hourglassBottom = document.getElementById("spaceLower");
+	// countdown clock
+	var timerDisplay = document.getElementById("countdown");
 
-var hourglassWhole = document.getElementById("hourglass_total");
+	// hourglass animation
+	var hourglassTop = document.getElementById("spaceUpper");
+	var hourglassBottom = document.getElementById("spaceLower");
+	var hourglassWhole = document.getElementById("hourglass_total");
 
-var breakDisplay = document.getElementById("breakType");
+	// notification to take a break
+	var breakDisplay = document.getElementById("breakType");
 
+	// get max time from user input
+	var timeInput = document.querySelector('.input_change input');
+	timeInput.addEventListener("change",updateTimer)
+	timeInput.addEventListener("mouseup",updateTimer)
 
-const maxTime = 30 // set the session duration in seconds
-
+// start counter at 0 and initialize the countdown clock
 var counter = 0
+resetClock();
 
-var secondsLeft = resetClock();
+function updateTimer(){
+	maxTime = timeInput.value*60
+	secondsLeft = maxTime;
+	timerDisplay.innerHTML = clockDisplay(secondsLeft);
+}
 
 function resetClock(){
-	// reset the timer and start button
-		secondsLeft = maxTime;
-		timerDisplay.innerHTML = clockDisplay(secondsLeft);
+	// reset the timer
+		updateTimer();
+	// reset the start button
 		startButton.disabled = false;
 		startButton.style.backgroundColor = "#FFF7D8";
-
 	// reset the hourglass display back to its original configuration
 	// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
 		hourglassTop.height = 0;
@@ -44,8 +59,6 @@ function resetClock(){
 	// reset the header to no quote
 	header.innerHTML = ""
 
-
-	return secondsLeft;
 }
 
 function clockDisplay(secondsLeft){
@@ -62,15 +75,20 @@ function newRound(){
 	// pick and random quote and put it in the header
 		getQuote(function(quoteList){
 		var x = quoteList[Math.floor(Math.random()*quoteList.length)];
-		console.log(x)
 		header.innerHTML =  x.toLowerCase();
 		}
 		);
+
+	// disable changing duration once started 
+	timeInput.disabled = true;
+	
+	// sound the gong and flip over the hourglass
 	gong.play();
 	hourglassWhole.style.transform = `rotate(0deg)`
 	startButton.disabled = true;
 	startButton.style.backgroundColor = "#BA004C"
 
+	// wait 3s for hourglass to flip, then start the timer
 	setTimeout(startTimer, 3000);
 
 }
