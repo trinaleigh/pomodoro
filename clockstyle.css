@@ -5,6 +5,7 @@ body {
 
 h1 {
     color: #FFF7D8;
+    min-height: 100px;
 }
 
 p {
@@ -93,4 +94,5 @@ img {
   justify-content: center;
   flex-direction: column;
 }
+
 

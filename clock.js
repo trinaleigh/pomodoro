@@ -1,5 +1,7 @@
 var gong = new Audio('audio/gong.mp3');
 
+var header = document.getElementById("quote_goes_here");
+
 var startButton = document.getElementById("start_button")
 var resetButton = document.getElementById("reset_button")
 resetButton.style.backgroundColor = `#BA004C`
@@ -14,7 +16,7 @@ var hourglassWhole = document.getElementById("hourglass_total");
 var breakDisplay = document.getElementById("breakType");
 
 
-const maxTime = 25*60 // set the session duration in seconds
+const maxTime = 30 // set the session duration in seconds
 
 var counter = 0
 
@@ -39,6 +41,10 @@ function resetClock(){
 			hourglassWhole.style.transition = `transform 5s`;
 		},1);
 
+	// reset the header to no quote
+	header.innerHTML = ""
+
+
 	return secondsLeft;
 }
 
@@ -53,6 +59,13 @@ function clockDisplay(secondsLeft){
 function newRound(){
 	counter += 1
 	breakDisplay.innerHTML = ""
+	// pick and random quote and put it in the header
+		getQuote(function(quoteList){
+		var x = quoteList[Math.floor(Math.random()*quoteList.length)];
+		console.log(x)
+		header.innerHTML =  x.toLowerCase();
+		}
+		);
 	gong.play();
 	hourglassWhole.style.transform = `rotate(0deg)`
 	startButton.disabled = true;
@@ -123,3 +136,26 @@ function resetSession(){
 	resetButton.disabled = false;
 	resetButton.style.backgroundColor = "#BA004C";
 }
+
+// wikiquote api call to get and format a list of quotes
+function getQuote(callback){
+    $.ajax({
+    	    url: 'https://en.wikiquote.org/w/api.php?action=parse&prop=text&page=English%20proverbs',
+            data: { action: 'parse', format: 'json' },
+            dataType: 'jsonp',
+            success: function (data) {
+                fullPage = data.parse.text['*'];
+                var lines = fullPage.split("\n");
+				var quoteList = []
+				for (i in lines){
+					if (lines[i].includes("<li>") && lines[i].slice(-1)==".") {
+						quoteList.push(lines[i].replace('<li>', ''));
+					}
+				}
+				callback(quoteList);
+            }            
+	})
+};
+
+
+
