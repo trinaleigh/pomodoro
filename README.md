@@ -1,6 +1,26 @@
 # pomodoro
 
-pomodoro timer with hourglass animation and sound
+## summary
+
+pomodoro timer runs in the browser and features an hourglass animation.
+
+default pomodoro duration is 25 minutes. duration is adjustable (minimum 5 minutes --> maximum 60 minutes, in 5 minute intervals).
+
+start of each pomodoro:
+* sound plays
+* page header displays a random proverb pulled from Wikiquote
+* hourglass turns over and countdown timer starts
+
+during the pomodoro:
+* countdown displays time remaining
+* hourglass sand gradually flows down
+
+end of the pomodoro:
+* sound plays
+* page displays message to take either short break or a long break
+* round (#1-4) is checked off
+
+## instructions: download all files and open index.html in Chrome
 
 files:
 * index.html
@@ -8,7 +28,5 @@ files:
 * clock.js
 * folder with svg image files
 * folder with mp3 audio files
-
-instructions: download all files and open index.html in Chrome
 
 compatibility: tested for Chrome v55
