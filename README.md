@@ -17,10 +17,13 @@ during the pomodoro:
 
 end of the pomodoro:
 * sound plays
+* desktop notification displays
 * page displays message to take either short break or a long break
 * round (#1-4) is checked off
 
-## instructions: download all files and open index.html in Chrome
+## instructions 
+
+download all files and open index.html in Chrome or run from a local server. note: desktop notifications require a server.
 
 files:
 * index.html
