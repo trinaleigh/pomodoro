@@ -1,15 +1,21 @@
+
+* {
+  --base: #BA004C;
+  --second: #FFF7D8;
+  font-family: Courier;
+}
+
 body {
-    background-color: #BA004C;
-    font-family: Courier;
+    background-color: var(--base);
 }
 
 h1 {
-    color: #FFF7D8;
+    color: var(--second);
     min-height: 100px;
 }
 
 p {
-    color: #FFF7D8;
+    color: var(--second);
     font-size: 24px;
     font-weight: bold;
 }
@@ -21,7 +27,7 @@ img {
 }
 
 form {
-    color: #FFF7D8;
+    color: var(--second);
     font-size: 24px;
     font-weight: bold;
     position: absolute;
@@ -29,9 +35,8 @@ form {
 }
 
 input[type=number] {
-    background-color: #FFF7D8;
-    color: #BA004C;
-    font-family: Courier;
+    background-color: var(--second);
+    color: var(--base);
     font-size: 24px;
     font-weight: bold;
     border: none;
@@ -70,10 +75,9 @@ input[type=number] {
 }
 
 .button {
-  background-color: #FFF7D8;
+  background-color: var(--second);
   border-radius: 12px;
   border: none;
- 	font-family: Courier;
   color: #BA004C;
   padding: 15px 32px;
  	text-align: center;

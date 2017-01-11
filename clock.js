@@ -1,3 +1,5 @@
+document.documentElement.style.setProperty(`--base`,`#BA004C`);
+
 // get audio file to play at start / end of each round
 var gong = new Audio('audio/gong.mp3');
 
