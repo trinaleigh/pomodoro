@@ -1,32 +1,36 @@
-document.documentElement.style.setProperty(`--base`,`#BA004C`);
+// document.documentElement.style.setProperty(`--base`,`#BA004C`);
 
 // get audio file to play at start / end of each round
-var gong = new Audio('audio/gong.mp3');
+const gong = new Audio('audio/gong.mp3');
+
+// set colors for hiding/showing buttons
+const baseColor = "#BA004C"
+const secondColor = "#FFF7D8"
 
 // get page elements:
 
 	// header for placing random quotes
-	var header = document.getElementById("quote_goes_here");
+	const header = document.getElementById("quote_goes_here");
 
 	// start and reset buttons
 	// make the reset button invisible to start
-	var startButton = document.getElementById("start_button")
-	var resetButton = document.getElementById("reset_button")
-	resetButton.style.backgroundColor = `#BA004C`
+	const startButton = document.getElementById("start_button")
+	const resetButton = document.getElementById("reset_button")
+	resetButton.style.backgroundColor = baseColor
 
 	// countdown clock
-	var timerDisplay = document.getElementById("countdown");
+	const timerDisplay = document.getElementById("countdown");
 
 	// hourglass animation
-	var hourglassTop = document.getElementById("spaceUpper");
-	var hourglassBottom = document.getElementById("spaceLower");
-	var hourglassWhole = document.getElementById("hourglass_total");
+	const hourglassTop = document.getElementById("spaceUpper");
+	const hourglassBottom = document.getElementById("spaceLower");
+	const hourglassWhole = document.getElementById("hourglass_total");
 
 	// notification to take a break
-	var breakDisplay = document.getElementById("breakType");
+	const breakDisplay = document.getElementById("breakType");
 
 	// get max time from user input
-	var timeInput = document.querySelector('.input_change input');
+	const timeInput = document.querySelector('.input_change input');
 	timeInput.addEventListener("change",updateTimer)
 	timeInput.addEventListener("mouseup",updateTimer)
 
@@ -45,7 +49,7 @@ function resetClock(){
 		updateTimer();
 	// reset the start button
 		startButton.disabled = false;
-		startButton.style.backgroundColor = "#FFF7D8";
+		startButton.style.backgroundColor = secondColor;
 	// reset the hourglass display back to its original configuration
 	// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
 		hourglassTop.height = 0;
@@ -88,7 +92,7 @@ function newRound(){
 	gong.play();
 	hourglassWhole.style.transform = `rotate(0deg)`
 	startButton.disabled = true;
-	startButton.style.backgroundColor = "#BA004C"
+	startButton.style.backgroundColor = baseColor
 
 	// wait 3s for hourglass to flip, then start the timer
 	setTimeout(startTimer, 3000);
@@ -127,7 +131,7 @@ function startTimer(){
 			}
 			else {
 				resetButton.disabled = false;
-				resetButton.style.backgroundColor = "#FFF7D8";
+				resetButton.style.backgroundColor = secondColor;
 			}
 		}
 	}	
@@ -154,7 +158,7 @@ function resetSession(){
 	secondsLeft = resetClock();
 	breakDisplay.innerHTML = ""
 	resetButton.disabled = false;
-	resetButton.style.backgroundColor = "#BA004C";
+	resetButton.style.backgroundColor = baseColor;
 }
 
 // wikiquote api call to get and format a list of quotes
