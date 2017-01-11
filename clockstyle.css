@@ -3,6 +3,7 @@
   --base: #BA004C;
   --second: #FFF7D8;
   font-family: Courier;
+  box-sizing: border-box
 }
 
 body {

@@ -1,4 +1,4 @@
-// document.documentElement.style.setProperty(`--base`,`#BA004C`);
+
 
 // get audio file to play at start / end of each round
 const gong = new Audio('audio/gong.mp3');
@@ -36,6 +36,8 @@ const secondColor = "#FFF7D8"
 
 // start counter at 0 and initialize the countdown clock
 var counter = 0
+
+notifyPerm();
 resetClock();
 
 function updateTimer(){
@@ -123,6 +125,7 @@ function startTimer(){
 		// reset at 0
 		if(secondsLeft <= 0) {
 			clearInterval(timerVar);
+			notifyEnd();
 			gong.play();
 			checkMark();
 			displayBreak();
@@ -136,6 +139,27 @@ function startTimer(){
 		}
 	}	
 }
+
+
+function notifyPerm(){
+	if (Notification.permission !== "granted"){
+		Notification.requestPermission();
+	}
+}
+
+function notifyEnd(){
+	   if (!("Notification" in window)) {
+    	alert("This browser does not support desktop notification");
+ 	  }
+      else if (Notification.permission === "granted") {
+        var notification = new Notification("time's up!");
+    }
+      else {
+      }	
+	};
+
+
+
 
 function checkMark(){
 	if(counter <= 4){
