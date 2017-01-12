@@ -4,7 +4,7 @@
 
 pomodoro timer runs in the browser and features an hourglass animation.
 
-default pomodoro duration is 25 minutes. duration is adjustable (minimum 5 minutes --> maximum 60 minutes, in 5 minute intervals).
+default pomodoro duration is 25 minutes. duration is adjustable (minimum 1 minute --> maximum 60 minutes, in 1 minute intervals).
 
 start of each pomodoro:
 * sound plays
@@ -18,7 +18,7 @@ during the pomodoro:
 end of the pomodoro:
 * sound plays
 * desktop notification displays
-* page displays message to take either short break or a long break
+* page displays message to take either short break or long break
 * round (#1-4) is checked off
 
 ## instructions 

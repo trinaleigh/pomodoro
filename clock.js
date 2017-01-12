@@ -7,7 +7,6 @@ const gong = new Audio('audio/gong.mp3');
 	const header = document.getElementById("quote_goes_here");
 
 	// start and reset buttons
-	// make the reset button invisible @ beginning
 	const startButton = document.getElementById("start_button")
 	const resetButton = document.getElementById("reset_button")
 
@@ -22,18 +21,20 @@ const gong = new Audio('audio/gong.mp3');
 	// notification to take a break
 	const breakDisplay = document.getElementById("breakType");
 
-	// get max time from user input
-	const timeInput = document.querySelector('.input_change input');
-	timeInput.addEventListener("change",updateTimer)
-	timeInput.addEventListener("mouseup",updateTimer)
+	// max time from user input
+	const timeInput = document.querySelector('.duration_change input');
+	timeInput.addEventListener("change", updateTimer)
+	timeInput.addEventListener("mouseup", updateTimer)
 
 // start counter at 0 and initialize the countdown clock
 var counter = 0
 
+// request notification permission and set up the clock
 notifyPerm();
 resetClock();
 
 function updateTimer(){
+	// upon user input for max time, update the timer display
 	maxTime = timeInput.value*60
 	secondsLeft = maxTime;
 	timerDisplay.innerHTML = clockDisplay(secondsLeft);
@@ -41,21 +42,21 @@ function updateTimer(){
 
 function resetClock(){
 	// reset the timer
-		updateTimer();
+	updateTimer();
+
 	// reset the start button
-		startButton.disabled = false;
+	startButton.disabled = false;
+
 	// reset the hourglass display back to its original configuration
 	// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
-		hourglassTop.height = 0;
-		hourglassBottom.height = 150;
+	hourglassTop.height = 0;
+	hourglassBottom.height = 150;
 		// hide the rotation
 		hourglassWhole.style.transition = `none`;
 		hourglassWhole.style.transform = `rotate(180deg)`;
-		// add Timeout before resetting transition - prevents net zero change getting swallowed in cache
-		setTimeout(function(){
-			hourglassWhole.style.transition = `transform 5s`;
-		},1);
-
+		// force CSS reflow before resetting transition - prevents net zero change getting swallowed in cache
+		hourglassWhole.offsetHeight; // (reflow)
+		hourglassWhole.style.transition = `transform 5s`;
 	// reset the header to no quote
 	header.innerHTML = ""
 
@@ -132,26 +133,25 @@ function startTimer(){
 
 
 function notifyPerm(){
+	// if notications are blocked, request permission
 	if (Notification.permission !== "granted"){
 		Notification.requestPermission();
 	}
 }
 
 function notifyEnd(){
-	   if (!("Notification" in window)) {
-    	alert("This browser does not support desktop notification");
+	// if notifications are supported and permitted, display notification
+	  if (!("Notification" in window)) {
+    	alert("this browser does not support desktop notifications.");
  	  }
       else if (Notification.permission === "granted") {
         var notification = new Notification("time's up!");
-    }
-      else {
-      }	
+    	}
 	};
 
 
-
-
 function checkMark(){
+	// check off the completed round #
 	if(counter <= 4){
 		var notebookDisplay = document.getElementById("round " + counter);
 		notebookDisplay.innerHTML += " ✓";
@@ -159,19 +159,21 @@ function checkMark(){
 }
 
 function displayBreak(){
+	// short break for rounds 1-3; long break for round 4
 	if(counter != 4){
 		breakDisplay.innerHTML = "take a short break!";
 	}
 	else {
-		breakDisplay.innerHTML = "take a long break!";
+		breakDisplay.innerHTML = "all done. take a long break!";
 	}
 }
 
 function resetSession(){
+	// set counter back to 0 and reset the timer
 	counter = 0;
 	secondsLeft = resetClock();
 	breakDisplay.innerHTML = ""
-	resetButton.disabled = false;
+	resetButton.disabled = true;
 	// remove the checkboxes
 	for(let i =1; i <= 4; i++){
 		console.log("hey" + i)
@@ -180,8 +182,8 @@ function resetSession(){
 	}
 }
 
-// wikiquote api call to get and format a list of quotes
 function getQuote(callback){
+	// wikiquote api call to get and format a list of quotes
     $.ajax({
     	    url: 'https://en.wikiquote.org/w/api.php?action=parse&prop=text&page=English%20proverbs',
             data: { action: 'parse', format: 'json' },
