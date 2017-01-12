@@ -13,7 +13,7 @@ const secondColor = "#FFF7D8"
 	const header = document.getElementById("quote_goes_here");
 
 	// start and reset buttons
-	// make the reset button invisible to start
+	// make the reset button invisible @ beginning
 	const startButton = document.getElementById("start_button")
 	const resetButton = document.getElementById("reset_button")
 	resetButton.style.backgroundColor = baseColor
@@ -183,6 +183,12 @@ function resetSession(){
 	breakDisplay.innerHTML = ""
 	resetButton.disabled = false;
 	resetButton.style.backgroundColor = baseColor;
+	// remove the checkboxes
+	for(let i =1; i <= 4; i++){
+		console.log("hey" + i)
+		var notebookDisplay = document.getElementById("round " + i);
+		notebookDisplay.innerHTML = "round " + i;
+	}
 }
 
 // wikiquote api call to get and format a list of quotes
@@ -204,6 +210,3 @@ function getQuote(callback){
             }            
 	})
 };
-
-
-
