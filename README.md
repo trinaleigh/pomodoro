@@ -23,7 +23,7 @@ end of the pomodoro:
 
 ## instructions 
 
-download all files and open index.html in Chrome or run from a local server. note: desktop notifications require a server.
+download all files and run index.html in browser. note: desktop notifications require a server (will not display from the filepath).
 
 files:
 * index.html
