@@ -70,15 +70,34 @@ function clockDisplay(secondsLeft){
 	return prettyTime
 }
 
+function randomQuote(quoteList){
+	return quoteList[Math.floor(Math.random()*quoteList.length)];
+}
+
+function stickInHeader(quote){
+	header.innerHTML = quote.toLowerCase()
+}
+
+function parseQuotePage(data){
+    fullPage = data.parse.text['*'];
+    var lines = fullPage.split("\n");
+	var quoteList = []
+	for (i in lines){
+		if (lines[i].includes("<li>") && lines[i].slice(-1)==".") {
+			quoteList.push(lines[i].replace('<li>', ''));
+		}
+	}
+	return $.Deferred().resolve(quoteList)
+}
+
 function newRound(){
 	counter += 1
 	breakDisplay.innerHTML = ""
+
 	// pick and random quote and put it in the header
-		getQuote(function(quoteList){
-		var x = quoteList[Math.floor(Math.random()*quoteList.length)];
-		header.innerHTML =  x.toLowerCase();
-		}
-		);
+	getQuoteList.then(parseQuotePage).then(function(quoteList) {
+		stickInHeader(randomQuote(quoteList));
+	});
 
 	// disable changing duration once started 
 	timeInput.disabled = true;
@@ -182,22 +201,11 @@ function resetSession(){
 	}
 }
 
-function getQuote(callback){
+function getQuoteList(){
 	// wikiquote api call to get and format a list of quotes
-    $.ajax({
-    	    url: 'https://en.wikiquote.org/w/api.php?action=parse&prop=text&page=English%20proverbs',
-            data: { action: 'parse', format: 'json' },
-            dataType: 'jsonp',
-            success: function (data) {
-                fullPage = data.parse.text['*'];
-                var lines = fullPage.split("\n");
-				var quoteList = []
-				for (i in lines){
-					if (lines[i].includes("<li>") && lines[i].slice(-1)==".") {
-						quoteList.push(lines[i].replace('<li>', ''));
-					}
-				}
-				callback(quoteList);
-            }            
-	})
+    return $.ajax({
+	    url: 'https://en.wikiquote.org/w/api.php?action=parse&prop=text&page=English%20proverbs',
+        data: { action: 'parse', format: 'json' },
+        dataType: 'jsonp'         
+	});
 };
