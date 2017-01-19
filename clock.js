@@ -3,28 +3,28 @@ const gong = new Audio('audio/gong.mp3');
 
 // get page elements:
 
-	// header for placing random quotes
-	const header = document.getElementById("quote_goes_here");
+// header for placing random quotes
+const header = document.getElementById("quote_goes_here");
 
-	// start and reset buttons
-	const startButton = document.getElementById("start_button")
-	const resetButton = document.getElementById("reset_button")
+// start and reset buttons
+const startButton = document.getElementById("start_button")
+const resetButton = document.getElementById("reset_button")
 
-	// countdown clock
-	const timerDisplay = document.getElementById("countdown");
+// countdown clock
+const timerDisplay = document.getElementById("countdown");
 
-	// hourglass animation
-	const hourglassTop = document.getElementById("spaceUpper");
-	const hourglassBottom = document.getElementById("spaceLower");
-	const hourglassWhole = document.getElementById("hourglass_total");
+// hourglass animation
+const hourglassTop = document.getElementById("spaceUpper");
+const hourglassBottom = document.getElementById("spaceLower");
+const hourglassWhole = document.getElementById("hourglass_total");
 
-	// notification to take a break
-	const breakDisplay = document.getElementById("breakType");
+// notification to take a break
+const breakDisplay = document.getElementById("breakType");
 
-	// max time from user input
-	const timeInput = document.querySelector('.duration_change input');
-	timeInput.addEventListener("change", updateTimer)
-	timeInput.addEventListener("mouseup", updateTimer)
+// max time from user input
+const timeInput = document.querySelector('.duration_change input');
+timeInput.addEventListener("change", updateTimer)
+timeInput.addEventListener("mouseup", updateTimer)
 
 // start counter at 0 and initialize the countdown clock
 var counter = 0
@@ -51,12 +51,12 @@ function resetClock(){
 	// note: reset creates no visible change to graphic, but required for animation to continue working as calculated below
 	hourglassTop.height = 0;
 	hourglassBottom.height = 150;
-		// hide the rotation
-		hourglassWhole.style.transition = `none`;
-		hourglassWhole.style.transform = `rotate(180deg)`;
-		// force CSS reflow before resetting transition - prevents net zero change getting swallowed in cache
-		hourglassWhole.offsetHeight; // (reflow)
-		hourglassWhole.style.transition = `transform 5s`;
+	// hide the rotation
+	hourglassWhole.style.transition = `none`;
+	hourglassWhole.style.transform = `rotate(180deg)`;
+	// force CSS reflow before resetting transition - prevents net zero change getting swallowed in cache
+	hourglassWhole.offsetHeight; // (reflow)
+	hourglassWhole.style.transition = `transform 5s`;
 	// reset the header to no quote
 	header.innerHTML = ""
 
@@ -74,11 +74,10 @@ function newRound(){
 	counter += 1
 	breakDisplay.innerHTML = ""
 	// pick and random quote and put it in the header
-		getQuote(function(quoteList){
+	getQuote(function(quoteList){
 		var x = quoteList[Math.floor(Math.random()*quoteList.length)];
 		header.innerHTML =  x.toLowerCase();
-		}
-		);
+	});
 
 	// disable changing duration once started 
 	timeInput.disabled = true;
@@ -121,6 +120,7 @@ function startTimer(){
 			gong.play();
 			checkMark();
 			displayBreak();
+
 			if(counter != 4){
 				resetClock();
 			}
@@ -141,13 +141,13 @@ function notifyPerm(){
 
 function notifyEnd(){
 	// if notifications are supported and permitted, display notification
-	  if (!("Notification" in window)) {
-    	alert("this browser does not support desktop notifications.");
- 	  }
-      else if (Notification.permission === "granted") {
-        var notification = new Notification("time's up!");
-    	}
-	};
+	if (!("Notification" in window)) {
+		alert("this browser does not support desktop notifications.");
+	}
+	else if (Notification.permission === "granted") {
+		var notification = new Notification("time's up!");
+	}
+};
 
 
 function checkMark(){
