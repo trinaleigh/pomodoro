@@ -23,13 +23,16 @@ end of the pomodoro:
 
 ## instructions 
 
-download all files and run index.html in browser. note: desktop notifications require a server (will not display from the filepath).
-
-files:
-* index.html
-* clockstyle.css
-* clock.js
-* folder with svg image files
-* folder with mp3 audio files
+npm install and run node index.js
 
 compatibility: tested for Chrome v55
+
+## files
+
+* index.js: express app
+* page folder
+	- index.html
+	- clockstyle.css
+	- clock.js
+	- image folder with svgs
+	- audio folder with mp3 file
